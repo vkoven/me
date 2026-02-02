@@ -1,0 +1,19 @@
+---
+/**
+ * Markdoc fence → Expressive Code.
+ * Maps Markdoc fence node attributes to astro-expressive-code Code component.
+ * Required because astro-expressive-code only runs on Markdown/MDX; .mdoc uses Markdoc's own renderer.
+ */
+import { Code } from "astro-expressive-code/components";
+
+interface Props {
+	/** Markdoc puts fence body in `content`. */
+	content: string;
+	/** Markdoc puts the fence language (e.g. ts, js) in `language`. */
+	language?: string;
+}
+
+const { content, language } = Astro.props;
+---
+
+<Code code={content} lang={language ?? ""} />
