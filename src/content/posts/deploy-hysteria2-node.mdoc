@@ -93,3 +93,18 @@ title: VPS上部署hysteria2节点
    ```bash
    hysteria2://pwss@你的VPS_IP:9527/?insecure=1&sni=www.bing.com
    ```
+
+1. #### 测试链接
+
+   ##### 在 VPS 上装 iperf3 测试 UDP：
+
+   ```bash
+   apt install -y iperf3
+   iperf3 -s -u -p 9526
+   ```
+
+   ##### 在 Mac/PC 上：
+
+   ```bash
+   iperf3 -c VPS_IP -u -p 9527 -b 0 -t 30
+   ```
