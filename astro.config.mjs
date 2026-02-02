@@ -10,7 +10,7 @@ import keystatic from '@keystatic/astro';
 const { SITE_URL } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
 
 export default defineConfig({
-  output: 'hybrid',
+  output: 'static',
   adapter: vercel(),
 
   integrations: [
