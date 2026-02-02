@@ -32,7 +32,7 @@ export default defineConfig({
       SITE_DESCRIPTION: envField.string({ context: 'client', access: 'public', default: 'Engineering leader specializing in system architecture, technical decision-making, and delivering measurable business impact.' }),
       
       // Author information
-      SITE_AUTHOR_NAME: envField.string({ context: 'client', access: 'public', default: 'vkonven' }),
+      SITE_AUTHOR_NAME: envField.string({ context: 'client', access: 'public', default: 'vkoven' }),
       SITE_AUTHOR_TITLE: envField.string({ context: 'client', access: 'public', default: 'Senior Software Engineer' }),
       SITE_AUTHOR_BIO: envField.string({ context: 'client', access: 'public', default: 'Engineering leader focused on solving complex technical challenges through thoughtful architecture and pragmatic trade-off analysis.' }),
       SITE_AUTHOR_EMAIL: envField.string({ context: 'client', access: 'public', default: 'coin9520@gmail.com' }),

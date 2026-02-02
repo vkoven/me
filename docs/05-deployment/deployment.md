@@ -41,7 +41,7 @@ npm run preview  # Preview build locally
    - Output directory: `dist`
 4. Add environment variables in dashboard
 
-**Keystatic CMS on Vercel:** This project uses `output: 'hybrid'` and the Vercel adapter so the Keystatic admin works in production. Content is stored in GitHub (not local files). After the first deploy:
+**Keystatic CMS on Vercel:** This project uses `output: 'static'` and the Vercel adapter so the Keystatic admin works in production. Content is stored in GitHub (not local files). After the first deploy:
 
 1. Visit `https://your-domain.com/keystatic` and sign in with GitHub.
 2. Complete the one-time GitHub App setup (create app, grant repo access).
@@ -50,7 +50,24 @@ npm run preview  # Preview build locally
    - `KEYSTATIC_GITHUB_CLIENT_SECRET`
    - `KEYSTATIC_SECRET`
    - `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` (Astro uses this name, not `NEXT_PUBLIC_...`)
-4. Redeploy so the new variables take effect. After that, `/keystatic` will work on the live site.
+4. Redeploy so the new variables take effect.
+
+**If GitHub shows "The redirect_uri is not associated with this application":**
+
+The Callback URL must be the **OAuth API endpoint**, not the `/keystatic` page:
+
+1. Open [GitHub → Installed Apps](https://github.com/settings/installations), click your Keystatic app → **App settings**.
+2. Under **User authorization callback URL**, set the Callback URL to:
+   - **Production:** `https://airdrop.uno/api/keystatic/github/oauth/callback`
+   - **Vercel preview (if needed):** `https://your-project.vercel.app/api/keystatic/github/oauth/callback`
+   - **Local dev:** `http://localhost:4321/api/keystatic/github/oauth/callback`
+3. Save, then try signing in again at `/keystatic`.
+
+**If Keystatic shows "Repo not found" and warns about `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`:**
+
+1. **Set the env var:** `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` is your GitHub App’s **slug** (URL name). Find it by going to [GitHub → Installed Apps](https://github.com/settings/installations) → your Keystatic app → **App settings**. The URL will look like `https://github.com/settings/apps/your-app-slug` — the part after `/apps/` is the slug. Add `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG=your-app-slug` in `.env` (local) and in Vercel (Project → Settings → Environment Variables), then restart/redeploy.
+
+2. **Grant the app access to the repo:** In the same App settings page, under **Repository access**, choose “Only select repositories”, add `vkoven/me` (or your repo), and save. Then reload `/keystatic`.
 
 ### Cloudflare Pages
 

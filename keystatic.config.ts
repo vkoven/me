@@ -8,7 +8,7 @@ const repo =
               owner: process.env.KEYSTATIC_GITHUB_REPO_OWNER,
               name: process.env.KEYSTATIC_GITHUB_REPO_NAME,
           }
-        : { owner: 'vkonven', name: 'me' };
+        : { owner: 'vkoven', name: 'me' };
 
 export default config({
     storage: {
