@@ -178,12 +178,6 @@ Edit `src/pages/index.astro`:
 - Featured projects display
 - Introduction content
 
-### Contact Page
-
-Edit `src/pages/contact.astro`:
-- Contact messaging
-- Response time expectations
-
 ### Navigation
 
 Edit `src/components/Navigation.astro` for style changes.

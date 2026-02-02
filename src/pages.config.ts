@@ -79,15 +79,6 @@ export const pagesConfig = {
   },
   
   /**
-   * Contact page (/contact)
-   */
-  contact: {
-    title: 'Contact - Get in Touch',
-    description: 'Get in touch to discuss opportunities, collaborations, or technical challenges.',
-    heading: 'Let\'s Talk',
-  },
-
-  /**
    * Posts listing page (/posts) — content from Keystatic
    */
   posts: {

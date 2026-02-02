@@ -10,7 +10,6 @@ Checklist and verification steps after deploying to production.
 - [ ] All navigation links work
 - [ ] Projects page shows case studies
 - [ ] Individual project pages load
-- [ ] Contact page displays email
 - [ ] Theme toggle works
 - [ ] Mobile navigation works
 
