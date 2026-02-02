@@ -96,8 +96,35 @@ const isActive = (href: string) => {
     });
   }
 
-  // Run on initial load and after each navigation
-  document.addEventListener('astro:page-load', updateActiveNav);
+  /** Prevent View Transitions (and reload) when clicking the link for the current page. */
+  function preventSamePageNav() {
+    const nav = document.querySelector('.site-nav');
+    if (!nav) return;
+    nav.querySelectorAll('.nav-link').forEach((link) => {
+      link.removeEventListener('click', handleNavClick, true);
+      link.addEventListener('click', handleNavClick, true);
+    });
+  }
+
+  function handleNavClick(e: Event) {
+    const link = e.currentTarget as HTMLAnchorElement;
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || link.target === '_blank') return;
+    try {
+      const pathname = new URL(href, window.location.origin).pathname;
+      if (pathname === window.location.pathname) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    } catch {
+      // ignore invalid URL
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    updateActiveNav();
+    preventSamePageNav();
+  });
 </script>
 
 <style>
