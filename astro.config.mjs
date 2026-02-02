@@ -12,21 +12,21 @@ const { SITE_URL } = loadEnv(process.env.NODE_ENV || 'production', process.cwd()
 
 export default defineConfig({
 
-  site: SITE_URL || 'https://example.com',
+  site: SITE_URL || 'https://airdrop.uno',
 
   env: {
     schema: {
       // Site configuration
-      SITE_URL: envField.string({ context: 'client', access: 'public', default: 'https://example.com' }),
+      SITE_URL: envField.string({ context: 'client', access: 'public', default: 'https://airdrop.uno' }),
       SITE_LANGUAGE: envField.string({ context: 'client', access: 'public', default: 'en' }),
       SITE_TITLE: envField.string({ context: 'client', access: 'public', default: 'Professional Portfolio' }),
       SITE_DESCRIPTION: envField.string({ context: 'client', access: 'public', default: 'Engineering leader specializing in system architecture, technical decision-making, and delivering measurable business impact.' }),
       
       // Author information
-      SITE_AUTHOR_NAME: envField.string({ context: 'client', access: 'public', default: 'Your Name' }),
+      SITE_AUTHOR_NAME: envField.string({ context: 'client', access: 'public', default: 'vkonven' }),
       SITE_AUTHOR_TITLE: envField.string({ context: 'client', access: 'public', default: 'Senior Software Engineer' }),
       SITE_AUTHOR_BIO: envField.string({ context: 'client', access: 'public', default: 'Engineering leader focused on solving complex technical challenges through thoughtful architecture and pragmatic trade-off analysis.' }),
-      SITE_AUTHOR_EMAIL: envField.string({ context: 'client', access: 'public', default: 'hello@example.com' }),
+      SITE_AUTHOR_EMAIL: envField.string({ context: 'client', access: 'public', default: 'coin9520@gmail.com' }),
       SITE_AUTHOR_LOCATION: envField.string({ context: 'client', access: 'public', default: '' }),
       
       // Social media links (empty string = hidden)
