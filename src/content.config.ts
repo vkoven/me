@@ -70,8 +70,17 @@ const testimonialsCollection = defineCollection({
   }),
 });
 
+/** Posts from Keystatic: path src/content/posts/*, format .mdoc (Markdoc) or .md */
+const postsCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdoc,mdx}', base: './src/content/posts' }),
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   projects: projectsCollection,
   journey: journeyCollection,
   testimonials: testimonialsCollection,
+  posts: postsCollection,
 };

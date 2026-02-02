@@ -1,8 +1,19 @@
 import { config, fields, collection } from '@keystatic/core';
 
+const repo =
+    typeof process !== 'undefined' &&
+    process.env?.KEYSTATIC_GITHUB_REPO_OWNER &&
+    process.env?.KEYSTATIC_GITHUB_REPO_NAME
+        ? {
+              owner: process.env.KEYSTATIC_GITHUB_REPO_OWNER,
+              name: process.env.KEYSTATIC_GITHUB_REPO_NAME,
+          }
+        : { owner: 'vkonven', name: 'me' };
+
 export default config({
     storage: {
-        kind: 'local',
+        kind: 'github',
+        repo,
     },
 
     collections: {

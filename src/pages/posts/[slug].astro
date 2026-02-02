@@ -1,0 +1,97 @@
+---
+/**
+ * Post Detail Page
+ *
+ * Renders a single post from the content collection (written via Keystatic).
+ * Route: /posts/[slug]
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/SEO.astro';
+import BackLink from '../../components/BackLink.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry('posts', slug!);
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await render(post);
+const { title } = post.data;
+---
+
+<BaseLayout>
+  <SEO
+    slot="head"
+    title={`${title} - Posts`}
+    description={title}
+    type="article"
+  />
+
+  <main class="post-page">
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+    </header>
+
+    <article class="post-content">
+      <Content />
+    </article>
+
+    <BackLink href="/posts" text="All posts" />
+  </main>
+
+  <style>
+    .post-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .post-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .post-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .post-content {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+    }
+    .post-content :global(h2) {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+    .post-content :global(p) {
+      margin-bottom: 1rem;
+    }
+    .post-content :global(ul),
+    .post-content :global(ol) {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .post-page {
+        padding: 1.5rem 1rem;
+      }
+      .post-title {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</BaseLayout>

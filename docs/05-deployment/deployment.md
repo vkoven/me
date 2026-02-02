@@ -41,6 +41,17 @@ npm run preview  # Preview build locally
    - Output directory: `dist`
 4. Add environment variables in dashboard
 
+**Keystatic CMS on Vercel:** This project uses `output: 'hybrid'` and the Vercel adapter so the Keystatic admin works in production. Content is stored in GitHub (not local files). After the first deploy:
+
+1. Visit `https://your-domain.com/keystatic` and sign in with GitHub.
+2. Complete the one-time GitHub App setup (create app, grant repo access).
+3. Copy the generated env vars into Vercel: Project → Settings → Environment Variables:
+   - `KEYSTATIC_GITHUB_CLIENT_ID`
+   - `KEYSTATIC_GITHUB_CLIENT_SECRET`
+   - `KEYSTATIC_SECRET`
+   - `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` (Astro uses this name, not `NEXT_PUBLIC_...`)
+4. Redeploy so the new variables take effect. After that, `/keystatic` will work on the live site.
+
 ### Cloudflare Pages
 
 1. Push repository to GitHub/GitLab
@@ -174,6 +185,12 @@ Set these in your hosting platform:
 - `SOCIAL_GITHUB`
 - `SOCIAL_LINKEDIN`
 - `SOCIAL_TWITTER`
+
+**Keystatic (Vercel / server):** Only needed if you use the Keystatic admin in production. Set after first visit to `/keystatic` and GitHub App setup:
+- `KEYSTATIC_GITHUB_CLIENT_ID`
+- `KEYSTATIC_GITHUB_CLIENT_SECRET`
+- `KEYSTATIC_SECRET`
+- `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`
 
 ## Custom Domain
 

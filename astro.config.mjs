@@ -1,16 +1,25 @@
 import { defineConfig, envField } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
 import { loadEnv } from 'vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
-import keystatic from '@keystatic/astro'
 import vercel from '@astrojs/vercel';
+import keystatic from '@keystatic/astro';
 
 const { SITE_URL } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
 
 export default defineConfig({
+  output: 'hybrid',
+  adapter: vercel(),
+
+  integrations: [
+    mdx(),
+    sitemap(),
+    react(),
+    markdoc(),
+    keystatic(),
+  ],
 
   site: SITE_URL || 'https://airdrop.uno',
 
@@ -56,8 +65,4 @@ export default defineConfig({
       wrap: true
     }
   },
-
-  adapter: cloudflare({
-    imageService: 'passthrough' 
-  }),
 });

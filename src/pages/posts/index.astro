@@ -1,0 +1,74 @@
+---
+/**
+ * Posts Index Page
+ *
+ * Lists all posts from the content collection (written via Keystatic).
+ * Route: /posts
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/SEO.astro';
+import { getCollection } from 'astro:content';
+import { pagesConfig } from '../../pages.config';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => b.id.localeCompare(a.id));
+---
+
+<BaseLayout>
+  <SEO
+    slot="head"
+    title={pagesConfig.posts.title}
+    description={pagesConfig.posts.description}
+    type="website"
+  />
+
+  <main class="page-container">
+    <header class="page-header">
+      <h1 class="page-title">{pagesConfig.posts.heading}</h1>
+      {pagesConfig.posts.intro && (
+        <p class="page-intro">{pagesConfig.posts.intro}</p>
+      )}
+    </header>
+
+    {sortedPosts.length > 0 ? (
+      <ul class="posts-list">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}`} class="post-link">
+              {post.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">No posts yet. Add content in <a href="/keystatic">Keystatic</a>.</p>
+    )}
+  </main>
+
+  <style>
+    .posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+    }
+    .posts-list li {
+      margin-bottom: 0.75rem;
+    }
+    .post-link {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 1.125rem;
+    }
+    .post-link:hover {
+      text-decoration: underline;
+    }
+    .empty-state {
+      color: var(--color-text-secondary);
+      margin-top: 2rem;
+    }
+    .empty-state a {
+      color: var(--color-accent);
+    }
+  </style>
+</BaseLayout>

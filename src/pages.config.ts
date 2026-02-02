@@ -86,6 +86,16 @@ export const pagesConfig = {
     description: 'Get in touch to discuss opportunities, collaborations, or technical challenges.',
     heading: 'Let\'s Talk',
   },
+
+  /**
+   * Posts listing page (/posts) — content from Keystatic
+   */
+  posts: {
+    title: 'Posts',
+    description: 'Articles and posts.',
+    heading: 'Posts',
+    intro: 'Articles written and managed via Keystatic.',
+  },
 } as const;
 
 /**
